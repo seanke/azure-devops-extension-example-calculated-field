@@ -1,0 +1,41 @@
+{
+    "manifestVersion": 1,
+    "id": "ado-calculated-field",
+    "publisher": "seanke",
+    "version": "1.0.7",
+    "name": "ADO Calculated Field",
+    "description": "A sample Visual Studio Services extension",
+    "public": false,
+    "categories": [
+        "Azure Boards"
+    ],
+    "targets": [
+        {
+            "id": "Microsoft.VisualStudio.Services"
+        }
+    ],
+    "contributions": [
+        {
+            "id": "work-item-form-calculate-field",
+            "type": "ms.vss-work-web.work-item-notifications",
+            "description": "Calulated field on work item form",
+            "targets": [
+                "ms.vss-work-web.work-item-form"
+            ],
+            "properties": {
+                "uri": "calculate-field.html"
+            }
+        }
+    ],
+    "files": [
+        {
+            "path": "calculate-field.html",
+            "addressable": true
+        },
+        {
+            "path": "node_modules/vss-web-extension-sdk/lib",
+            "addressable": true,
+            "packagePath": "lib"
+        }
+    ]
+}

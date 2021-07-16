@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Work item extension page sample</title>
+</head>
+
+<body>
+    <script src="lib/VSS.SDK.js"></script>
+
+    <script>
+        VSS.init({
+            explicitNotifyLoaded: true,
+            usePlatformScripts: true
+        });
+
+        VSS.ready(function () {
+            // Register a listener for the work item page contribution.
+
+             VSS.register(VSS.getContribution().id, function () {
+                return {
+                    onFieldChanged: function (args) {
+                        console.log("onFieldChanged: " + JSON.stringify(args));
+                    },
+
+                    onLoaded: function (args) {
+                        console.log("onLoaded: " + JSON.stringify(args));
+                    },
+
+                    onUnloaded: function (args) {
+                        console.log("onUnloaded: " + JSON.stringify(args));
+                    },
+
+                    onSaved: function (args) {
+                        console.log("onSaved: " + JSON.stringify(args));
+                    },
+
+                    onReset: function (args) {
+                        console.log("onReset: " + JSON.stringify(args));
+                    },
+
+                    onRefreshed: function (args) {
+                        console.log("onReset: " + JSON.stringify(args));
+                    }
+                }
+            });
+
+            VSS.notifyLoadSucceeded();
+        });
+    </script>
+</body>
+
+</html>
