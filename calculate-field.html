@@ -15,13 +15,28 @@
             usePlatformScripts: true
         });
 
-        VSS.ready(function () {
+        VSS.require(["TFS/WorkItemTracking/Services"], function (_WorkItemServices) {
+            //VSS.ready(function () {
             // Register a listener for the work item page contribution.
 
-             VSS.register(VSS.getContribution().id, function () {
+            console.log("point 1");
+
+            function getWorkItemFormService() {
+                return _WorkItemServices.WorkItemFormService.getService();
+            }
+
+            console.log("point 4");
+            VSS.register(VSS.getContribution().id, function () {
                 return {
                     onFieldChanged: function (args) {
                         console.log("onFieldChanged: " + JSON.stringify(args));
+                        getWorkItemFormService().then(function (service) {
+                            service.getFieldValues(["System.Id", "Microsoft.VSTS.Common.Priority"]).then(
+                                function (value) {
+                                    service.setFieldValue("System.Description", JSON.stringify(value));
+                                }
+                            );
+                        });
                     },
 
                     onLoaded: function (args) {
